@@ -51,15 +51,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- [[ Custom Keymap ]]
 vim.keymap.set('n', '<leader>pv', '<cmd>Ex<CR>', { desc = 'File explorer' })
 -- -- [[TMUX]]
-vim.keymap.set('n', '<C-h>', ':<C-U>TmuxNavigateLeft<cr>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-l>', ':<C-U>TmuxNavigateRight<cr>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-j>', ':<C-U>TmuxNavigateDown<cr>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-k>', ':<C-U>TmuxNavigateUp<cr>', { noremap = true, silent = true })
-vim.keymap.set('n', '<C->', ':<C-U>TmuxNavigatePrevious<cr>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-h>', ':<C-U>TmuxNavigateLeft<cr>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-l>', ':<C-U>TmuxNavigateRight<cr>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-j>', ':<C-U>TmuxNavigateDown<cr>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-k>', ':<C-U>TmuxNavigateUp<cr>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C->', ':<C-U>TmuxNavigatePrevious<cr>', { noremap = true, silent = true })
 -- [[HARPOOOON]]
 local mark = require 'harpoon.mark'
 local ui = require 'harpoon.ui'
 
 vim.keymap.set('n', '<leader>a', mark.add_file, { desc = 'Add File' })
 vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu, { desc = 'Quick Menu' })
--- vim: ts=2 sts=2 sw=2 et
+--
+vim.keymap.set('i', '<C-K>', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+--
+--

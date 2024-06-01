@@ -30,6 +30,17 @@ return {
       --
       -- LSP provides Neovim with features like:
       --  - Go to definition
+      vim.diagnostic.config {
+        -- update_in_insert = true,
+        float = {
+          focusable = false,
+          style = 'minimal',
+          border = 'rounded',
+          source = 'always',
+          header = '',
+          prefix = '',
+        },
+      }
       --  - Find references
       --  - Autocompletion
       --  - Symbol Search
@@ -50,13 +61,14 @@ return {
         callback = function(event)
           -- NOTE: Remember that Lua is a real programming language, and as such it is possible
           -- to define small helper and utility functions so you don't have to repeat yourself.
-          --
           -- In this case, we create a function that lets us more easily define mappings specific
           -- for LSP related items. It sets the mode, buffer and description for us each time.
           local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
-
+          vim.keymap.set('i', '<C-k>', function()
+            vim.lsp.buf.signature_help()
+          end, { buffer = event.buf, desc = 'LSP: [H]over Information' })
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
@@ -157,7 +169,7 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {},
         pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -167,9 +179,9 @@ return {
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
         tsserver = {},
-        bashls={},
-        yamlls={},
-        marksman={},
+        bashls = {},
+        yamlls = {},
+        marksman = {},
 
         --
 
